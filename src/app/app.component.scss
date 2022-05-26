@@ -1,5 +1,12 @@
 .header {
   font-size: 15px;
+  background-color: rgb(16, 95, 134);
+}
+
+.link {
+  margin-top: 10px;
+  text-align: left;
+  align-self: start;
 }
 
 .logo {
@@ -10,4 +17,9 @@
 .icon-link {
   color: white;
   margin-left: 10px;
+  text-decoration: none;
+}
+
+.description {
+  margin-left: 900px;
 }
