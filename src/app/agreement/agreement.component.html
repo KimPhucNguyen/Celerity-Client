@@ -1,1 +1,37 @@
-<p>agreement works!</p>
+
+  <div class="container mt-5">
+
+    <h2>Angular Display Data from Json File Example</h2>
+
+    <table class="table table-striped">
+      <thead>
+          <tr>
+            <th>Id</th>
+            <th>Status</th>
+            <th>QuoteNumber</th>
+            <th>AgreementName</th>
+            <th>AgreementType</th>
+            <th>DistributorName</th>
+            <th>EffectiveDate</th>
+            <th>ExpirationDate</th>
+            <th>CreatedDate</th>
+            <th>DaysUntilExplation</th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let agreemant of Agreements">
+          <td>{{ agreemant.id }}</td>
+          <td>{{ agreemant.status }}</td>
+          <td>{{ agreemant.quoteNumber }}</td>
+          <td>{{ agreemant.agreementName }}</td>
+          <td>{{ agreemant.agreementType }}</td>
+          <td>{{ agreemant.distributorName }}</td>
+          <td>{{ agreemant.effectiveDate }}</td>
+          <td>{{ agreemant.expirationDate }}</td>
+          <td>{{ agreemant.createdDate }}</td>
+          <td>{{ agreemant.daysUntilExplation }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
