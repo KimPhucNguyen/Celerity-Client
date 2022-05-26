@@ -9,6 +9,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HomeComponent } from './home/home.component';
 import { AgreementComponent } from './agreement/agreement.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AgGridModule } from 'ag-grid-angular';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     SharedModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    AgGridModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

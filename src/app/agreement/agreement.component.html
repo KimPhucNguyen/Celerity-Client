@@ -1,37 +1,36 @@
-
-  <div class="container mt-5">
-
-    <h2>Angular Display Data from Json File Example</h2>
-
-    <table class="table table-striped">
-      <thead>
-          <tr>
-            <th>Id</th>
-            <th>Status</th>
-            <th>QuoteNumber</th>
-            <th>AgreementName</th>
-            <th>AgreementType</th>
-            <th>DistributorName</th>
-            <th>EffectiveDate</th>
-            <th>ExpirationDate</th>
-            <th>CreatedDate</th>
-            <th>DaysUntilExplation</th>
-          </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let agreemant of Agreements">
-          <td>{{ agreemant.id }}</td>
-          <td>{{ agreemant.status }}</td>
-          <td>{{ agreemant.quoteNumber }}</td>
-          <td>{{ agreemant.agreementName }}</td>
-          <td>{{ agreemant.agreementType }}</td>
-          <td>{{ agreemant.distributorName }}</td>
-          <td>{{ agreemant.effectiveDate }}</td>
-          <td>{{ agreemant.expirationDate }}</td>
-          <td>{{ agreemant.createdDate }}</td>
-          <td>{{ agreemant.daysUntilExplation }}</td>
-        </tr>
-      </tbody>
-    </table>
+<div class="content">
+  <div class="bc-icons">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class="white-text" [routerLink]="['']"
+            [routerLinkActive]="'active-link'">Home</a></li>
+        <li class="breadcrumb-item bold"><i class="fa-solid fa-angle-right"></i> Agreements</li>
+      </ol>
+    </nav>
   </div>
 
+  <h3 id="titleWelcome" class="bold">Agreements</h3>
+  <p>View, modify, and edit agreement details to prepare for claim submission</p>
+
+</div>
+
+<div style="height: calc(100% - 60px); margin-left: 10px; margin-right: 10px;">
+  <ag-grid-angular style="width: 100%; height: 70%;" class="ag-theme-alpine" [columnDefs]="columnDefs"
+    [defaultColDef]="defaultColDef" [sideBar]="sideBar" [rowData]="Agreements" (gridReady)="onGridReady($event)">
+  </ag-grid-angular>
+
+  <div class="pagination">
+    <button (click)="firstPage()">&laquo;&laquo;</button>
+    <button (click)="prevPage()">&laquo;</button>
+    <a>{{pagePresent}} of {{totalData}}</a>
+    <button (click)="nextPage()">&raquo;</button>
+    <button (click)="lastPage()">&raquo;&raquo;</button>
+  </div>
+
+  <!-- <mat-paginator [length]='totalData'
+[pageSize]="2"
+[pageSizeOptions]="[5, 10, 25, 100]"
+(page)="pageEvent = $event; onPaginateChange($event, $event); "
+aria-label="Select page">
+</mat-paginator> -->
+</div>

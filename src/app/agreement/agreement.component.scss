@@ -7,3 +7,59 @@
   overflow-y: hidden;
   overflow-x: hidden;
 }
+
+#logo {
+  height: 50px;
+  width: 50px;
+  margin-left: 20px;
+}
+
+.icon-link {
+  color: white;
+  margin-left: 10px;
+}
+
+#titleWelcome {
+  color: rgb(41, 116, 162);
+}
+
+#myGrid {
+  height: 60vh;
+  width: 100%;
+
+}
+
+.header-custom-ag {
+  color: rgb(41, 116, 162);
+}
+
+.link {
+  margin-top: 10px;
+}
+
+.description {
+  margin-top: 10px;
+
+}
+
+.bc-icons .breadcrumb-item+.breadcrumb-item::before {
+  content: none;
+}
+
+.bc-icons .breadcrumb-item.active {
+  color: #eeeeee;
+}
+.bold{
+  font-weight: bold;
+}
+
+.pagination{
+  display: flex;
+  justify-content: center;
+}
+
+.pagination a {
+  color: black;
+  padding: 8px 16px;
+  text-decoration: none;
+}
