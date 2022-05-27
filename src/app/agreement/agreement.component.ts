@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {PageEvent} from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { PageEvent } from '@angular/material/paginator';
 import {
   ColDef,
   GridApi,
@@ -14,6 +14,9 @@ import {
 import 'ag-grid-enterprise';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+import { HttpServerServiceService } from '../Services/http-server-service.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { CreateComponent } from '../Dialog/create/create.component';
 
 export class Agreement {
   constructor(
@@ -73,54 +76,66 @@ class DeltaIndicator implements ICellRenderer {
   styleUrls: ['./agreement.component.scss']
 })
 export class AgreementComponent implements OnInit {
-    //private pageEvent: PageEvent,
+  //private pageEvent: PageEvent,
 
   public Agreements: Agreement[] = [];
   public pagePresent = 1;
   public totalData = 0;
-  public totalRow = 2;
-
+  public totalRow = 5;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private url: HttpServerServiceService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
     //this.getAgreements();
   }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(CreateComponent, {
+      width: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.pagePresent = 1;
+      this.getAgreements();
+    });
+  }
+
   getAgreements() {
-    this.http.get<any>('https://localhost:7153/api/Agreements?PageIndex='+this.pagePresent+'&PageSize='+this.totalRow).subscribe(
+    this.http.get<any>(this.url.REST_API_SERVER + 'api/Agreements?PageIndex=' + this.pagePresent + '&PageSize=' + this.totalRow).subscribe(
       response => {
-        this.totalData = (response.totalRecord) / (this.totalRow);
+        this.totalData = Math.round((response.totalRecord) / (this.totalRow));
         this.Agreements = response.data;
       }
     );
   }
 
-  nextPage(){
-    if(this.pagePresent < this.totalData){
-      this.pagePresent ++;
+  nextPage() {
+    if (this.pagePresent < this.totalData) {
+      this.pagePresent++;
       this.getAgreements();
     }
   }
 
-  prevPage(){
-    if(this.pagePresent > 1){
-      this.pagePresent --;
+  prevPage() {
+    if (this.pagePresent > 1) {
+      this.pagePresent--;
       this.getAgreements();
     }
   }
 
-  firstPage(){
-    if(this.pagePresent > 1){
+  firstPage() {
+    if (this.pagePresent > 1) {
       this.pagePresent = 1;
       this.getAgreements();
     }
   }
 
-  lastPage(){
-    if(this.pagePresent < this.totalData){
+  lastPage() {
+    if (this.pagePresent < this.totalData) {
       this.pagePresent = this.totalData;
       this.getAgreements();
     }

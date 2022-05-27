@@ -11,6 +11,7 @@
 
   <h3 id="titleWelcome" class="bold">Agreements</h3>
   <p>View, modify, and edit agreement details to prepare for claim submission</p>
+  <button mat-raised-button color="primary" (click)="openDialog()">Create new</button>
 
 </div>
 
@@ -26,11 +27,4 @@
     <button (click)="nextPage()">&raquo;</button>
     <button (click)="lastPage()">&raquo;&raquo;</button>
   </div>
-
-  <!-- <mat-paginator [length]='totalData'
-[pageSize]="2"
-[pageSizeOptions]="[5, 10, 25, 100]"
-(page)="pageEvent = $event; onPaginateChange($event, $event); "
-aria-label="Select page">
-</mat-paginator> -->
 </div>
