@@ -1,1 +1,30 @@
-<p>agreement works!</p>
+<div class="content">
+  <div class="bc-icons">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class="white-text" [routerLink]="['']"
+            [routerLinkActive]="'active-link'">Home</a></li>
+        <li class="breadcrumb-item bold"><i class="fa-solid fa-angle-right"></i> Agreements</li>
+      </ol>
+    </nav>
+  </div>
+
+  <h3 id="titleWelcome" class="bold">Agreements</h3>
+  <p>View, modify, and edit agreement details to prepare for claim submission</p>
+  <button mat-raised-button color="primary" (click)="openDialog()">Create new</button>
+
+</div>
+
+<div style="height: calc(100% - 60px); margin-left: 10px; margin-right: 10px;">
+  <ag-grid-angular style="width: 100%; height: 70%;" class="ag-theme-alpine" [columnDefs]="columnDefs"
+    [defaultColDef]="defaultColDef" [sideBar]="sideBar" [rowData]="Agreements" (gridReady)="onGridReady($event)">
+  </ag-grid-angular>
+
+  <div class="pagination">
+    <button (click)="firstPage()">&laquo;&laquo;</button>
+    <button (click)="prevPage()">&laquo;</button>
+    <a>{{pagePresent}} of {{totalData}}</a>
+    <button (click)="nextPage()">&raquo;</button>
+    <button (click)="lastPage()">&raquo;&raquo;</button>
+  </div>
+</div>
