@@ -1,0 +1,105 @@
+<div class="register-form">
+  <form [formGroup]="form" (ngSubmit)="onUpdate()">
+    <div class="form-group">
+      <label>Status</label>
+      <select class="form-select" aria-label="Default select example" formControlName="status"
+        [ngClass]="{ 'is-invalid': submitted && abstract['status'].errors }">
+        <option value="Invalid">Invalid</option>
+        <option value="Published">Published</option>
+        <option value="Pending">Pending</option>
+      </select>
+      <div *ngIf="submitted && abstract['status'].errors" class="invalid-feedback">
+        <div *ngIf="abstract['status'].errors['required']">Status is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Quote Number </label>
+      <input type="text" formControlName="quoteNumber" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && abstract['quoteNumber'].errors }" />
+      <div *ngIf="submitted && abstract['quoteNumber'].errors" class="invalid-feedback">
+        <div *ngIf="abstract['quoteNumber'].errors['required']">Quote Number is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Agreement Name </label>
+      <input type="text" formControlName="agreementName" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && abstract['agreementName'].errors }" />
+      <div *ngIf="submitted && abstract['agreementName'].errors" class="invalid-feedback">
+        <div *ngIf="abstract['agreementName'].errors['required']">Agreement Name is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Agreement Type </label>
+      <input type="text" formControlName="agreementType" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && abstract['agreementType'].errors }" />
+      <div *ngIf="submitted && abstract['agreementType'].errors" class="invalid-feedback">
+        <div *ngIf="abstract['agreementType'].errors['required']">Agreement Type is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Effective Date </label>
+      <input type="datetime-local" formControlName="effectiveDate" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && abstract['effectiveDate'].errors }" />
+      <div *ngIf="submitted && abstract['effectiveDate'].errors" class="invalid-feedback">
+        <div *ngIf="abstract['effectiveDate'].errors['required']">Effective Date is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Expiration Date </label>
+      <input type="datetime-local" formControlName="expirationDate" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && abstract['expirationDate'].errors }" />
+      <div *ngIf="submitted && abstract['expirationDate'].errors" class="invalid-feedback">
+        <div *ngIf="abstract['expirationDate'].errors['required']">Expiration Date is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Created Date </label>
+      <input type="datetime-local" formControlName="createdDate" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && abstract['createdDate'].errors }" />
+      <div *ngIf="submitted && abstract['createdDate'].errors" class="invalid-feedback">
+        <div *ngIf="abstract['createdDate'].errors['required']">Created Date is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Days Until Explation </label>
+      <input type="number" formControlName="daysUntilExplation" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && abstract['daysUntilExplation'].errors }" />
+      <div *ngIf="submitted && abstract['daysUntilExplation'].errors" class="invalid-feedback">
+        <div *ngIf="abstract['daysUntilExplation'].errors['required']">Days Until Explation is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Distributor Name </label>
+      <select class="form-select" aria-label="Default select example" formControlName="distributorId"
+        [ngClass]="{ 'is-invalid': submitted && abstract['distributorId'].errors }">
+        <option value="1">Werner</option>
+      </select>
+      <div *ngIf="submitted && abstract['distributorId'].errors" class="invalid-feedback">
+        <div *ngIf="abstract['distributorId'].errors['required']">Distributor Name is required</div>
+      </div>
+    </div>
+    <br>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-outline-primary">Update</button>
+      <button type="button" (click)="onReset()" class="btn btn-outline-warning">
+        Reset
+      </button>
+      <button type="button" (click)="onCancel()" class="btn btn-outline-dark">
+        Cancel
+      </button>
+      <button type="button" (click)="onDelete()" class="btn btn-outline-danger">
+        Delete
+      </button>
+    </div>
+  </form>
+</div>
+

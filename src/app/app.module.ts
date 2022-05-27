@@ -16,13 +16,15 @@ import { CreateComponent } from './Dialog/create/create.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { EditComponent } from './Dialog/edit/edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     AgreementComponent,
-    CreateComponent
+    CreateComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,
