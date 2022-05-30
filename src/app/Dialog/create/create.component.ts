@@ -7,6 +7,13 @@ import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { HttpServerServiceService } from 'src/app/Services/http-server-service.service';
 
+export class Distributor {
+  constructor(
+    public id: number,
+    public distributorName: string,
+  ) {
+  }
+}
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
@@ -25,6 +32,8 @@ export class CreateComponent implements OnInit {
     distributorId: new FormControl(''),
   });
   submitted = false;
+
+  public Distributor: Distributor[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<CreateComponent>,
@@ -48,11 +57,22 @@ export class CreateComponent implements OnInit {
       },
 
     );
+
+    this.getAllDistributors();
   }
 
   get abstract(): { [key: string]: AbstractControl } {
     return this.form.controls;
   }
+
+  getAllDistributors() : void{
+    this.http.get<any>(this.url.REST_API_SERVER + 'api/Distributors').subscribe(
+      response => {
+        this.Distributor = response;
+      }
+    );
+  }
+
   onCreate(): void {
     this.submitted = true;
     if (!this.form.invalid) {

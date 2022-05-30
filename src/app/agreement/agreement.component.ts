@@ -262,7 +262,4 @@ export class AgreementComponent implements OnInit {
     this.getAgreements();
   }
 
-
-
-
 }

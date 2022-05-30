@@ -4,6 +4,14 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HttpServerServiceService } from 'src/app/Services/http-server-service.service';
 
+export class Distributor {
+  constructor(
+    public id: number,
+    public distributorName: string,
+  ) {
+  }
+}
+
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
@@ -24,6 +32,8 @@ export class EditComponent implements OnInit {
     distributorId: new FormControl(''),
   });
   submitted = false;
+
+  public Distributor: Distributor[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<EditComponent>,
@@ -49,11 +59,21 @@ export class EditComponent implements OnInit {
       },
 
     );
+    this.getAllDistributors();
   }
 
   get abstract(): { [key: string]: AbstractControl } {
     return this.form.controls;
   }
+
+  getAllDistributors() : void{
+    this.http.get<any>(this.url.REST_API_SERVER + 'api/Distributors').subscribe(
+      response => {
+        this.Distributor = response;
+      }
+    );
+  }
+
   onUpdate(): void {
     this.submitted = true;
     if (!this.form.invalid) {
@@ -64,7 +84,6 @@ export class EditComponent implements OnInit {
   }
 
   onDelete(): void {
-    debugger
     this.http.delete<any>(this.url.REST_API_SERVER + 'api/Agreements/' + this.data.id).subscribe();
     this.dialogRef.close();
   }

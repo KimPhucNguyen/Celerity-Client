@@ -80,8 +80,13 @@
       <label>Distributor Name </label>
       <select class="form-select" aria-label="Default select example" formControlName="distributorId"
         [ngClass]="{ 'is-invalid': submitted && abstract['distributorId'].errors }">
-        <option value="1">Werner</option>
+        <option value="{{data.id}}" *ngFor="let data of this.Distributor">
+          {{data.distributorName}}
+        </option>
       </select>
+
+
+
       <div *ngIf="submitted && abstract['distributorId'].errors" class="invalid-feedback">
         <div *ngIf="abstract['distributorId'].errors['required']">Distributor Name is required</div>
       </div>
