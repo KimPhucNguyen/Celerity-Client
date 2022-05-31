@@ -21,8 +21,8 @@ export class HttpServerServiceService {
     return this.httpClient.get<any>(url, this.httpOptions);
   }
 
-  public getAgreementsSearch(status: string, quoteNumber: string, agreementName: string, agreementType: string, pagePresent: number, totalRow: number): Observable<any> {
-    const url = `${this.REST_API_SERVER_AGREEMENTS}?status=` + status + `&quoteNumber=` + quoteNumber + `&agreementName=` + agreementName + `&agreementType=` + agreementType + `&PageIndex=` + pagePresent + `&PageSize=` + totalRow;
+  public getAgreementsSearch(status: string, quoteNumber: string, agreementName: string, agreementType: string, distributorName: string, daysUntilExplation: number, pagePresent: number, totalRow: number): Observable<any> {
+    const url = `${this.REST_API_SERVER_AGREEMENTS}?status=` + status + `&quoteNumber=` + quoteNumber + `&agreementName=` + agreementName + `&agreementType=` + agreementType + `&distributorName=` + distributorName + `&daysUntilExplation=` + daysUntilExplation + `&PageIndex=` + pagePresent + `&PageSize=` + totalRow;
     return this.httpClient.get<any>(url, this.httpOptions);
   }
 

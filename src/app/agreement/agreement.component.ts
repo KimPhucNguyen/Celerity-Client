@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -18,6 +17,7 @@ import { HttpServerServiceService } from '../Services/http-server-service.servic
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CreateComponent } from '../Dialog/create/create.component';
 import { EditComponent } from '../Dialog/edit/edit.component';
+import { CustomFilterAgreementComponent } from '../Custom/custom-filter-agreement/custom-filter-agreement.component';
 
 export class Agreement {
   constructor(
@@ -101,6 +101,8 @@ export class AgreementComponent implements OnInit {
   public agreementNameSearch = '';
   public agreementTypeSearch = '';
   public effectiveDateSearch = '';
+  public distributorNameSearch = '';
+  public daysUntilExplationSearch= '';
 
   public rowSelection = 'single';
   public pagePresent = 1;
@@ -108,8 +110,6 @@ export class AgreementComponent implements OnInit {
   public totalRow = 5;
 
   constructor(
-    private http: HttpClient,
-    private url: HttpServerServiceService,
     private httpServerService: HttpServerServiceService,
     public dialog: MatDialog
   ) { }
@@ -130,19 +130,19 @@ export class AgreementComponent implements OnInit {
   }
 
   getAgreements() {
-    if (this.statusSearch != '' || this.quoteNumberSearch != '' || this.agreementNameSearch != '' || this.agreementTypeSearch != '') {
+    if (this.statusSearch != '' || this.quoteNumberSearch != '' || this.agreementNameSearch != '' || this.agreementTypeSearch != '' || this.daysUntilExplationSearch) {
       //this.pagePresent = 1;
-      this.httpServerService.getAgreementsSearch(this.statusSearch, this.quoteNumberSearch, this.agreementNameSearch, this.agreementTypeSearch, this.pagePresent, this.totalRow).subscribe(response => {
+      this.httpServerService.getAgreementsSearch(this.statusSearch, this.quoteNumberSearch, this.agreementNameSearch, this.agreementTypeSearch,this.distributorNameSearch, Number(this.daysUntilExplationSearch), this.pagePresent, this.totalRow).subscribe(response => {
         this.totalData = Math.ceil((response.totalRecord) / (this.totalRow));
         this.Agreements = response.data;
       }
       );
     }
-    else {
-      this.httpServerService.getAgreements(this.pagePresent, this.totalRow).subscribe(response => {
-        this.totalData = Math.ceil((response.totalRecord) / (this.totalRow));
-        this.Agreements = response.data;
-      });
+     else {
+    this.httpServerService.getAgreements(this.pagePresent, this.totalRow).subscribe(response => {
+      this.totalData = Math.ceil((response.totalRecord) / (this.totalRow));
+      this.Agreements = response.data;
+    });
 
     }
 
@@ -196,16 +196,39 @@ export class AgreementComponent implements OnInit {
         }
         return null;
       },
-      cellRenderer: DeltaIndicator
+      cellRenderer: DeltaIndicator,
+      filter: 'agTextColumnFilter',
+      floatingFilterComponent: CustomFilterAgreementComponent,
+
     },
-    { field: 'quoteNumber' },
-    { field: 'agreementName', minWidth: 180 },
-    { field: 'agreementType', minWidth: 200 },
-    { field: 'distributorName' },
+    {
+      field: 'quoteNumber',
+      filter: 'agTextColumnFilter',
+      floatingFilterComponent: CustomFilterAgreementComponent,
+    },
+    {
+      field: 'agreementName', minWidth: 180,
+      filter: 'agTextColumnFilter',
+      floatingFilterComponent: CustomFilterAgreementComponent,
+    },
+    {
+      field: 'agreementType', minWidth: 200,
+      filter: 'agTextColumnFilter',
+      floatingFilterComponent: CustomFilterAgreementComponent,
+    },
+    {
+      field: 'distributorName',
+      filter: 'agTextColumnFilter',
+      floatingFilterComponent: CustomFilterAgreementComponent,
+    },
     { field: 'effectiveDate' },
     { field: 'expirationDate' },
     { field: 'createdDate' },
-    { field: 'daysUntilExplation' },
+    {
+      field: 'daysUntilExplation',
+      filter: 'agTextColumnFilter',
+      floatingFilterComponent: CustomFilterAgreementComponent,
+    },
   ];
   public defaultColDef: ColDef = {
     flex: 1,
@@ -214,9 +237,9 @@ export class AgreementComponent implements OnInit {
     enableRowGroup: false,
     enablePivot: false,
     sortable: true,
-    //filter: true,
+    filter: true,
     editable: true,
-    // floatingFilter: true,
+    floatingFilter: true,
     resizable: true,
   };
   public sideBar: SideBarDef = {
@@ -285,10 +308,6 @@ export class AgreementComponent implements OnInit {
   }
   //#endregion
 
-  // onSearchStatus(event: any) {
-  //   this.statusSearch = event.target.value;
-  //   this.getAgreements();
-  // }
   onSearchStatus(event: any) {
     this.statusSearch = event.target.value;
     this.getAgreements();
