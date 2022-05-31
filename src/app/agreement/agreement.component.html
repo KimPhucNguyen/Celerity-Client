@@ -17,8 +17,8 @@
 
 <div style="height: calc(100% - 60px); margin-left: 10px; margin-right: 10px;">
   <ag-grid-angular style="width: 100%; height: 70%;" class="ag-theme-alpine" [columnDefs]="columnDefs"
-    [defaultColDef]="defaultColDef" [sideBar]="sideBar" [rowData]="Agreements" [rowSelection]="rowSelection"(gridReady)="onGridReady($event)"
-    (rowDoubleClicked)="onSelectionChanged()">
+    [defaultColDef]="defaultColDef" [sideBar]="sideBar" [rowData]="Agreements" [rowSelection]="rowSelection"
+    (gridReady)="onGridReady($event)" (rowDoubleClicked)="onSelectionChanged()">
   </ag-grid-angular>
 
   <div class="pagination">
@@ -28,4 +28,18 @@
     <button (click)="nextPage()">&raquo;</button>
     <button (click)="lastPage()">&raquo;&raquo;</button>
   </div>
+<div >
+  <select [value]="statusSearch" (change)="onSearchStatus($event)" style="margin-right: 10px;">
+    <option value=""></option>
+    <option value="Invalid">Invalid</option>
+    <option value="Published">Published</option>
+    <option value="Pending">Pending</option>
+  </select>
+  <input (keyup)="onSearchQuote($event)" style="margin-right: 10px;">
+  <input (keyup)="onSearchAgreementName($event)" style="margin-right: 10px;">
+  <input (keyup)="onSearchAgreementType($event)" style="margin-right: 10px;">
+</div>
+
+
+
 </div>

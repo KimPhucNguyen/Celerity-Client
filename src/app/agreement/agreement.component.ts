@@ -82,6 +82,7 @@ export class AgreementComponent implements OnInit {
 
   public Agreements: Agreement[] = [];
 
+  //#region Choose
   public idChoose = 0;
   public statusChoose = '';
   public quoteNumber = '';
@@ -92,7 +93,14 @@ export class AgreementComponent implements OnInit {
   public effectiveDate = '';
   public expirationDate = '';
   public createdDate = '';
-  public daysUntilExplation = 0
+  public daysUntilExplation = 0;
+  //#endregion
+
+  public statusSearch = '';
+  public quoteNumberSearch = '';
+  public agreementNameSearch = '';
+  public agreementTypeSearch = '';
+  public effectiveDateSearch = '';
 
   public rowSelection = 'single';
   public pagePresent = 1;
@@ -102,6 +110,7 @@ export class AgreementComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private url: HttpServerServiceService,
+    private httpServerService: HttpServerServiceService,
     public dialog: MatDialog
   ) { }
 
@@ -121,14 +130,25 @@ export class AgreementComponent implements OnInit {
   }
 
   getAgreements() {
-    this.http.get<any>(this.url.REST_API_SERVER + 'api/Agreements?PageIndex=' + this.pagePresent + '&PageSize=' + this.totalRow).subscribe(
-      response => {
-        this.totalData = Math.round((response.totalRecord) / (this.totalRow));
+    if (this.statusSearch != '' || this.quoteNumberSearch != '' || this.agreementNameSearch != '' || this.agreementTypeSearch != '') {
+      //this.pagePresent = 1;
+      this.httpServerService.getAgreementsSearch(this.statusSearch, this.quoteNumberSearch, this.agreementNameSearch, this.agreementTypeSearch, this.pagePresent, this.totalRow).subscribe(response => {
+        this.totalData = Math.ceil((response.totalRecord) / (this.totalRow));
         this.Agreements = response.data;
       }
-    );
+      );
+    }
+    else {
+      this.httpServerService.getAgreements(this.pagePresent, this.totalRow).subscribe(response => {
+        this.totalData = Math.ceil((response.totalRecord) / (this.totalRow));
+        this.Agreements = response.data;
+      });
+
+    }
+
   }
 
+  //#region Paging
   nextPage() {
     if (this.pagePresent < this.totalData) {
       this.pagePresent++;
@@ -156,7 +176,9 @@ export class AgreementComponent implements OnInit {
       this.getAgreements();
     }
   }
+  //#endregion
 
+  //#region Ag-Grid
   private gridApi!: GridApi;
 
   public columnDefs: ColDef[] = [
@@ -192,9 +214,9 @@ export class AgreementComponent implements OnInit {
     enableRowGroup: false,
     enablePivot: false,
     sortable: true,
-    filter: true,
+    //filter: true,
     editable: true,
-    floatingFilter: true,
+    // floatingFilter: true,
     resizable: true,
   };
   public sideBar: SideBarDef = {
@@ -242,7 +264,7 @@ export class AgreementComponent implements OnInit {
         quoteNumber: this.quoteNumber,
         agreementName: this.agreementName,
         agreementType: this.agreementType,
-        distributorId : this.distributorId,
+        distributorId: this.distributorId,
         distributorName: this.distributorName,
         effectiveDate: this.effectiveDate,
         expirationDate: this.expirationDate,
@@ -261,5 +283,26 @@ export class AgreementComponent implements OnInit {
     this.gridApi = params.api;
     this.getAgreements();
   }
+  //#endregion
 
+  // onSearchStatus(event: any) {
+  //   this.statusSearch = event.target.value;
+  //   this.getAgreements();
+  // }
+  onSearchStatus(event: any) {
+    this.statusSearch = event.target.value;
+    this.getAgreements();
+  }
+  onSearchQuote(event: any) {
+    this.quoteNumberSearch = event.target.value;
+    this.getAgreements();
+  }
+  onSearchAgreementName(event: any) {
+    this.agreementNameSearch = event.target.value;
+    this.getAgreements();
+  }
+  onSearchAgreementType(event: any) {
+    this.agreementTypeSearch = event.target.value;
+    this.getAgreements();
+  }
 }

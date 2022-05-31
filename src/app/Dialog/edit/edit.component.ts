@@ -38,9 +38,8 @@ export class EditComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<EditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private http: HttpClient,
     private formBuilder: FormBuilder,
-    private url: HttpServerServiceService,
+    private httpServerService: HttpServerServiceService,
   ) { }
 
   ngOnInit(): void {
@@ -66,8 +65,8 @@ export class EditComponent implements OnInit {
     return this.form.controls;
   }
 
-  getAllDistributors() : void{
-    this.http.get<any>(this.url.REST_API_SERVER + 'api/Distributors').subscribe(
+  getAllDistributors(): void {
+    this.httpServerService.getDistributors().subscribe(
       response => {
         this.Distributor = response;
       }
@@ -77,14 +76,13 @@ export class EditComponent implements OnInit {
   onUpdate(): void {
     this.submitted = true;
     if (!this.form.invalid) {
-      const headers = { 'Content-Type': 'application/json' };
-      this.http.put<any>(this.url.REST_API_SERVER + 'api/Agreements', this.form.value, { headers }).subscribe();
+      this.httpServerService.putAgreement(this.form.value).subscribe();
       this.dialogRef.close();
     }
   }
 
   onDelete(): void {
-    this.http.delete<any>(this.url.REST_API_SERVER + 'api/Agreements/' + this.data.id).subscribe();
+    this.httpServerService.deleteAgreement(this.data.id).subscribe();
     this.dialogRef.close();
   }
 

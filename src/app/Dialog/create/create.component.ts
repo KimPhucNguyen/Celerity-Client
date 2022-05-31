@@ -37,9 +37,8 @@ export class CreateComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<CreateComponent>,
-    private http: HttpClient,
     private formBuilder: FormBuilder,
-    private url: HttpServerServiceService,
+    private httpServerService: HttpServerServiceService,
   ) { }
 
   ngOnInit(): void {
@@ -65,8 +64,8 @@ export class CreateComponent implements OnInit {
     return this.form.controls;
   }
 
-  getAllDistributors() : void{
-    this.http.get<any>(this.url.REST_API_SERVER + 'api/Distributors').subscribe(
+  getAllDistributors(): void {
+    this.httpServerService.getDistributors().subscribe(
       response => {
         this.Distributor = response;
       }
@@ -76,8 +75,7 @@ export class CreateComponent implements OnInit {
   onCreate(): void {
     this.submitted = true;
     if (!this.form.invalid) {
-      const headers = { 'Content-Type': 'application/json' };
-      this.http.post<any>(this.url.REST_API_SERVER + 'api/Agreements', this.form.value, { headers }).subscribe();
+      this.httpServerService.postAgreement(this.form.value).subscribe();
       this.dialogRef.close();
     }
   }

@@ -2,7 +2,7 @@
   <form [formGroup]="form" (ngSubmit)="onCreate()">
     <div class="form-group">
       <label>Status</label>
-      <select class="form-select" aria-label="Default select example" formControlName="status"
+      <select class="form-select"  formControlName="status"
         [ngClass]="{ 'is-invalid': submitted && abstract['status'].errors }">
         <option value="Invalid">Invalid</option>
         <option value="Published">Published</option>
