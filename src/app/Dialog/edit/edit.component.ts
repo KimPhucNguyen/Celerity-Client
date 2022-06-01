@@ -28,7 +28,6 @@ export class EditComponent implements OnInit {
     effectiveDate: new FormControl(''),
     expirationDate: new FormControl(''),
     createdDate: new FormControl(''),
-    daysUntilExplation: new FormControl(''),
     distributorId: new FormControl(''),
   });
   submitted = false;

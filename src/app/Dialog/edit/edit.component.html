@@ -68,15 +68,6 @@
     </div>
 
     <div class="form-group">
-      <label>Days Until Explation </label>
-      <input type="number" formControlName="daysUntilExplation" class="form-control"
-        [ngClass]="{ 'is-invalid': submitted && abstract['daysUntilExplation'].errors }" />
-      <div *ngIf="submitted && abstract['daysUntilExplation'].errors" class="invalid-feedback">
-        <div *ngIf="abstract['daysUntilExplation'].errors['required']">Days Until Explation is required</div>
-      </div>
-    </div>
-
-    <div class="form-group">
       <label>Distributor Name </label>
       <select class="form-select" aria-label="Default select example" formControlName="distributorId"
         [ngClass]="{ 'is-invalid': submitted && abstract['distributorId'].errors }">
