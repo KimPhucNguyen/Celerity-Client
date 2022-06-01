@@ -7,6 +7,13 @@ import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { HttpServerServiceService } from 'src/app/Services/http-server-service.service';
 
+export class Distributor {
+  constructor(
+    public id: number,
+    public distributorName: string,
+  ) {
+  }
+}
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
@@ -21,16 +28,16 @@ export class CreateComponent implements OnInit {
     effectiveDate: new FormControl(''),
     expirationDate: new FormControl(''),
     createdDate: new FormControl(''),
-    daysUntilExplation: new FormControl(''),
     distributorId: new FormControl(''),
   });
   submitted = false;
 
+  public Distributor: Distributor[] = [];
+
   constructor(
     public dialogRef: MatDialogRef<CreateComponent>,
-    private http: HttpClient,
     private formBuilder: FormBuilder,
-    private url: HttpServerServiceService,
+    private httpServerService: HttpServerServiceService,
   ) { }
 
   ngOnInit(): void {
@@ -48,16 +55,26 @@ export class CreateComponent implements OnInit {
       },
 
     );
+
+    this.getAllDistributors();
   }
 
   get abstract(): { [key: string]: AbstractControl } {
     return this.form.controls;
   }
+
+  getAllDistributors(): void {
+    this.httpServerService.getDistributors().subscribe(
+      response => {
+        this.Distributor = response;
+      }
+    );
+  }
+
   onCreate(): void {
     this.submitted = true;
     if (!this.form.invalid) {
-      const headers = { 'Content-Type': 'application/json' };
-      this.http.post<any>(this.url.REST_API_SERVER + 'api/Agreements', this.form.value, { headers }).subscribe();
+      this.httpServerService.postAgreement(this.form.value).subscribe();
       this.dialogRef.close();
     }
   }

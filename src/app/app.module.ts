@@ -16,13 +16,19 @@ import { CreateComponent } from './Dialog/create/create.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { EditComponent } from './Dialog/edit/edit.component';
+import { CustomFilterAgreementComponent } from './Custom/custom-filter-agreement/custom-filter-agreement.component';
+import { CustomFilterDateComponent } from './Custom/custom-filter-date/custom-filter-date.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     AgreementComponent,
-    CreateComponent
+    CreateComponent,
+    EditComponent,
+    CustomFilterAgreementComponent,
+    CustomFilterDateComponent
   ],
   imports: [
     BrowserModule,
