@@ -186,7 +186,7 @@ export class AgreementComponent implements OnInit {
 
   public columnDefs: ColDef[] = [
     {
-      field: 'status', minWidth: 200,
+      field: 'status',
       cellStyle: params => {
         if (params.value === 'Invalid') {
           return { color: 'red' };
