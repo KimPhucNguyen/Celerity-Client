@@ -52,13 +52,13 @@ class DeltaIndicator implements ICellRenderer {
       this.eGui = imageElemennewt;
     } else if (params.value === 'Published') {
       imageElement.src =
-        '../../assets/images/tick.png';
+        '/assets/images/tick.png';
       element.appendChild(document.createTextNode(params.value + " "));
       element.appendChild(imageElement);
       this.eGui = element;
     } else {
       imageElement.src =
-        '../../assets/images/pending.png';
+        '/assets/images/pending.png';
       element.appendChild(document.createTextNode(params.value + " "));
       element.appendChild(imageElement);
       this.eGui = element;
