@@ -28,18 +28,4 @@
     <button (click)="nextPage()">&raquo;</button>
     <button (click)="lastPage()">&raquo;&raquo;</button>
   </div>
-<div >
-  <select [value]="statusSearch" (change)="onSearchStatus($event)" style="margin-right: 10px;">
-    <option value=""></option>
-    <option value="Invalid">Invalid</option>
-    <option value="Published">Published</option>
-    <option value="Pending">Pending</option>
-  </select>
-  <input (keyup)="onSearchQuote($event)" style="margin-right: 10px;">
-  <input (keyup)="onSearchAgreementName($event)" style="margin-right: 10px;">
-  <input (keyup)="onSearchAgreementType($event)" style="margin-right: 10px;">
-</div>
-
-
-
 </div>

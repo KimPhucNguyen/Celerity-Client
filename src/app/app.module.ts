@@ -18,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { EditComponent } from './Dialog/edit/edit.component';
 import { CustomFilterAgreementComponent } from './Custom/custom-filter-agreement/custom-filter-agreement.component';
+import { CustomFilterDateComponent } from './Custom/custom-filter-date/custom-filter-date.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CustomFilterAgreementComponent } from './Custom/custom-filter-agreement
     AgreementComponent,
     CreateComponent,
     EditComponent,
-    CustomFilterAgreementComponent
+    CustomFilterAgreementComponent,
+    CustomFilterDateComponent
   ],
   imports: [
     BrowserModule,

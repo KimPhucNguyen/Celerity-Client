@@ -18,6 +18,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { CreateComponent } from '../Dialog/create/create.component';
 import { EditComponent } from '../Dialog/edit/edit.component';
 import { CustomFilterAgreementComponent } from '../Custom/custom-filter-agreement/custom-filter-agreement.component';
+import { CustomFilterDateComponent } from '../Custom/custom-filter-date/custom-filter-date.component';
 
 export class Agreement {
   constructor(
@@ -101,8 +102,10 @@ export class AgreementComponent implements OnInit {
   public agreementNameSearch = '';
   public agreementTypeSearch = '';
   public effectiveDateSearch = '';
+  public expirationDateSearch = '';
+  public createdDateSearch = '';
   public distributorNameSearch = '';
-  public daysUntilExplationSearch= '';
+  public daysUntilExplationSearch = '';
 
   public rowSelection = 'single';
   public pagePresent = 1;
@@ -130,19 +133,19 @@ export class AgreementComponent implements OnInit {
   }
 
   getAgreements() {
-    if (this.statusSearch != '' || this.quoteNumberSearch != '' || this.agreementNameSearch != '' || this.agreementTypeSearch != '' || this.daysUntilExplationSearch) {
+    if (this.statusSearch != '' || this.quoteNumberSearch != '' || this.agreementNameSearch != '' || this.agreementTypeSearch != '' || this.effectiveDateSearch != '' || this.expirationDateSearch != '' || this.createdDateSearch != '' || this.daysUntilExplationSearch) {
       //this.pagePresent = 1;
-      this.httpServerService.getAgreementsSearch(this.statusSearch, this.quoteNumberSearch, this.agreementNameSearch, this.agreementTypeSearch,this.distributorNameSearch, Number(this.daysUntilExplationSearch), this.pagePresent, this.totalRow).subscribe(response => {
+      this.httpServerService.getAgreementsSearch(this.statusSearch, this.quoteNumberSearch, this.agreementNameSearch, this.agreementTypeSearch, this.distributorNameSearch, this.effectiveDateSearch, this.expirationDateSearch, this.createdDateSearch, Number(this.daysUntilExplationSearch), this.pagePresent, this.totalRow).subscribe(response => {
         this.totalData = Math.ceil((response.totalRecord) / (this.totalRow));
         this.Agreements = response.data;
       }
       );
     }
-     else {
-    this.httpServerService.getAgreements(this.pagePresent, this.totalRow).subscribe(response => {
-      this.totalData = Math.ceil((response.totalRecord) / (this.totalRow));
-      this.Agreements = response.data;
-    });
+    else {
+      this.httpServerService.getAgreements(this.pagePresent, this.totalRow).subscribe(response => {
+        this.totalData = Math.ceil((response.totalRecord) / (this.totalRow));
+        this.Agreements = response.data;
+      });
 
     }
 
@@ -221,9 +224,21 @@ export class AgreementComponent implements OnInit {
       filter: 'agTextColumnFilter',
       floatingFilterComponent: CustomFilterAgreementComponent,
     },
-    { field: 'effectiveDate' },
-    { field: 'expirationDate' },
-    { field: 'createdDate' },
+    {
+      field: 'effectiveDate',
+      filter: 'agTextColumnFilter',
+      floatingFilterComponent: CustomFilterDateComponent,
+    },
+    {
+      field: 'expirationDate',
+      filter: 'agTextColumnFilter',
+      floatingFilterComponent: CustomFilterDateComponent,
+    },
+    {
+      field: 'createdDate',
+      filter: 'agTextColumnFilter',
+      floatingFilterComponent: CustomFilterDateComponent,
+    },
     {
       field: 'daysUntilExplation',
       filter: 'agTextColumnFilter',
@@ -307,21 +322,4 @@ export class AgreementComponent implements OnInit {
     this.getAgreements();
   }
   //#endregion
-
-  onSearchStatus(event: any) {
-    this.statusSearch = event.target.value;
-    this.getAgreements();
-  }
-  onSearchQuote(event: any) {
-    this.quoteNumberSearch = event.target.value;
-    this.getAgreements();
-  }
-  onSearchAgreementName(event: any) {
-    this.agreementNameSearch = event.target.value;
-    this.getAgreements();
-  }
-  onSearchAgreementType(event: any) {
-    this.agreementTypeSearch = event.target.value;
-    this.getAgreements();
-  }
 }

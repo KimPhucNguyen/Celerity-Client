@@ -98,7 +98,7 @@ export class CustomFilterAgreementComponent implements IFloatingFilterAngularCom
         }
       }
 
-      this.httpServerService.getAgreementsSearch(this.agreement.statusSearch, this.agreement.quoteNumberSearch, this.agreement.agreementNameSearch, this.agreement.agreementTypeSearch,this.agreement.distributorNameSearch, Number(this.agreement.daysUntilExplationSearch), this.agreement.pagePresent, this.agreement.totalRow).subscribe(response => {
+      this.httpServerService.getAgreementsSearch(this.agreement.statusSearch, this.agreement.quoteNumberSearch, this.agreement.agreementNameSearch, this.agreement.agreementTypeSearch, this.agreement.distributorNameSearch, this.agreement.effectiveDateSearch, this.agreement.expirationDateSearch, this.agreement.createdDateSearch, Number(this.agreement.daysUntilExplationSearch), this.agreement.pagePresent, this.agreement.totalRow).subscribe(response => {
         this.agreement.totalData = Math.ceil((response.totalRecord) / (this.agreement.totalRow));
         this.agreement.Agreements = response.data;
       }
