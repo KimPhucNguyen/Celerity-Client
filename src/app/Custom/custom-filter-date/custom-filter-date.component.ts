@@ -6,9 +6,9 @@ import { HttpServerServiceService } from 'src/app/Services/http-server-service.s
 
 @Component({
   selector: 'app-custom-filter-date',
-  template: `&gt;
+  template: `
   <input
-    style="width: 50px"
+    style="width: 50px; margin-top: 10px;"
     type="date"
     [(ngModel)]="currentValue"
     (input)="onInputBoxChanged($event)"

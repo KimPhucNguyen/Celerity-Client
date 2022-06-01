@@ -7,9 +7,9 @@ import { HttpServerServiceService } from 'src/app/Services/http-server-service.s
 @Component({
   selector: 'app-custom-filter-agreement',
 
-  template: `&gt;
+  template: `
     <input
-      style="width: 50px"
+      style="width: 50px; margin-top: 10px;"
       type="text"
       [(ngModel)]="currentValue"
       (input)="onInputBoxChanged($event)"
