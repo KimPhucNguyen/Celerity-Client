@@ -19,6 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { EditComponent } from './Dialog/edit/edit.component';
 import { CustomFilterAgreementComponent } from './Custom/custom-filter-agreement/custom-filter-agreement.component';
 import { CustomFilterDateComponent } from './Custom/custom-filter-date/custom-filter-date.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import { CustomFilterDateComponent } from './Custom/custom-filter-date/custom-fi
     MatIconModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

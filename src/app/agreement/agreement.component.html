@@ -22,10 +22,10 @@
   </ag-grid-angular>
 
   <div class="pagination">
-    <button (click)="firstPage()">&laquo;&laquo;</button>
-    <button (click)="prevPage()">&laquo;</button>
+    <button type="button" class="btn btn-outline-dark" (click)="firstPage()">&laquo;&laquo;</button>
+    <button type="button" class="btn btn-outline-dark" (click)="prevPage()">&laquo;</button>
     <a>{{pagePresent}} of {{totalData}}</a>
-    <button (click)="nextPage()">&raquo;</button>
-    <button (click)="lastPage()">&raquo;&raquo;</button>
+    <button type="button" class="btn btn-outline-dark" (click)="nextPage()">&raquo;</button>
+    <button type="button" class="btn btn-outline-dark" (click)="lastPage()">&raquo;&raquo;</button>
   </div>
 </div>
