@@ -6,9 +6,14 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class HttpServerServiceService {
-  public REST_API_SERVER = 'https://localhost:7153/';
-  public REST_API_SERVER_AGREEMENTS = 'https://localhost:7153/api/Agreements';
-  public REST_API_SERVER_DISTRIBUTORS = 'https://localhost:7153/api/Distributors';
+  // public REST_API_SERVER = 'https://localhost:7153/';
+  // public REST_API_SERVER_AGREEMENTS = 'https://localhost:7153/api/Agreements';
+  // public REST_API_SERVER_DISTRIBUTORS = 'https://localhost:7153/api/Distributors';
+
+  public REST_API_SERVER = 'http://103.92.24.117:2222/';
+  public REST_API_SERVER_AGREEMENTS = 'http://103.92.24.117:2222/api/Agreements';
+  public REST_API_SERVER_DISTRIBUTORS = 'http://103.92.24.117:2222/api/Distributors';
+
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
