@@ -2,7 +2,7 @@
   <div class="bc-icons">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a class="white-text" [routerLink]="['']"
+        <li class="breadcrumb-item"><a class="white-text" [routerLink]="['/home']"
             [routerLinkActive]="'active-link'">Home</a></li>
         <li class="breadcrumb-item bold"><i class="fa-solid fa-angle-right"></i> Agreements</li>
       </ol>
@@ -12,6 +12,7 @@
   <h3 id="titleWelcome" class="bold">Agreements</h3>
   <p>View, modify, and edit agreement details to prepare for claim submission</p>
   <button mat-raised-button color="primary" (click)="openDialog()">Create new</button>
+  <button type="button" class="btn btn-outline-dark" (click)="LogOut()">Logout</button>
 
 </div>
 

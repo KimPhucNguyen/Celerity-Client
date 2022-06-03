@@ -19,6 +19,8 @@ import { CreateComponent } from '../Dialog/create/create.component';
 import { EditComponent } from '../Dialog/edit/edit.component';
 import { CustomFilterAgreementComponent } from '../Custom/custom-filter-agreement/custom-filter-agreement.component';
 import { CustomFilterDateComponent } from '../Custom/custom-filter-date/custom-filter-date.component';
+import { AuthService } from '../Services/auth.service';
+import { Observable } from 'rxjs';
 
 export class Agreement {
   constructor(
@@ -112,13 +114,16 @@ export class AgreementComponent implements OnInit {
   public totalData = 0;
   public totalRow = 5;
 
+  public isLoggedIn$: Observable<boolean> = new Observable<boolean>();
   constructor(
     private httpServerService: HttpServerServiceService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private Auth: AuthService
   ) { }
 
   ngOnInit(): void {
     //this.getAgreements();
+    this.isLoggedIn$ = this.Auth.isLoggedIn();
   }
 
   openDialog(): void {
@@ -149,6 +154,10 @@ export class AgreementComponent implements OnInit {
 
     }
 
+  }
+
+  public LogOut(): void{
+    this.Auth.logout();
   }
 
   //#region Paging
