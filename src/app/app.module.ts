@@ -20,6 +20,7 @@ import { EditComponent } from './Dialog/edit/edit.component';
 import { CustomFilterAgreementComponent } from './Custom/custom-filter-agreement/custom-filter-agreement.component';
 import { CustomFilterDateComponent } from './Custom/custom-filter-date/custom-filter-date.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     CreateComponent,
     EditComponent,
     CustomFilterAgreementComponent,
-    CustomFilterDateComponent
+    CustomFilterDateComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
